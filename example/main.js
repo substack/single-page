@@ -1,7 +1,7 @@
 var divs = {
-    foo : document.querySelector('#foo'),
-    bar : document.querySelector('#bar'),
-    baz : document.querySelector('#baz')
+    foo: document.querySelector('#foo'),
+    bar: document.querySelector('#bar'),
+    baz: document.querySelector('#baz')
 };
 
 var singlePage = require('../');

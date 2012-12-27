@@ -1,0 +1,26 @@
+{
+    "name" : "single-page",
+    "version" : "0.0.0",
+    "description" : "pushState callback with a #hash fallback",
+    "main" : "index.js",
+    "scripts" : {
+        "test" : "tap test/*.js"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/substack/single-page.git"
+    },
+    "homepage" : "https://github.com/substack/single-page",
+    "keywords" : [
+        "pushState",
+        "single-page",
+        "client-side",
+        "browser"
+    ],
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    },
+    "license" : "MIT"
+}
