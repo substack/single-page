@@ -1,22 +1,29 @@
 module.exports = function (cb, opts) {
     var page = new Page(cb, opts);
     
-    window.addEventListener('hashchange', function () {
+    if (window.addEventListener) {
+        window.addEventListener('hashchange', onhashchange);
+        window.addEventListener('popstate', onpopstate);
+    }
+    else {
+        window.onhashchange = onhashchange;
+    }
+    
+    function onhashchange () {
         var href = window.location.hash.replace(/^#!\/?/, '/');
         if (current !== href && /^#!/.test(window.location.hash)) {
             page.show(href);
         }
-    });
+    }
     
-    window.addEventListener('popstate', popstate);
-    function popstate () {
+    function onpopstate () {
         var href = /^#!/.test(window.location.hash)
             ? window.location.hash.replace(/^#!/, '/')
             : window.location.pathname
         ;
         page.show(href);
     }
-    if (!page.hasPushState) popstate();
+    if (!page.hasPushState) onpopstate();
     
     return function (href) { return page.show(href) };
 };
