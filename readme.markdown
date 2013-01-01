@@ -91,10 +91,14 @@ not reloading the page.
 var singlePage = require('single-page')
 ```
 
-## var showPage = singlePage(cb)
+## var showPage = singlePage(cb, opts)
 
-Fire `cb(href)` at the start and whenever the page navigation changes so you can
-update the page contents accordingly.
+Fire `cb(href, page)` at the start and whenever the page navigation changes so
+you can update the page contents accordingly.
+
+If `opts.saveScroll` is `!== false`, `page.scrollX` and `page.scrollY` are saved
+for every unique `href` so that you can jump back to the same scroll position
+that the user left off at.
 
 ## showPage(href)
 

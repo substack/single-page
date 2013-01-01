@@ -1,6 +1,6 @@
 {
     "name" : "single-page",
-    "version" : "0.0.0",
+    "version" : "0.1.0",
     "description" : "pushState callback with a #hash fallback",
     "main" : "index.js",
     "scripts" : {
