@@ -23,7 +23,7 @@ module.exports = function (cb, opts) {
         ;
         page.show(href);
     }
-    if (!page.hasPushState) onpopstate();
+    onpopstate();
     
     return function (href) { return page.show(href) };
 };
