@@ -35,14 +35,23 @@ function Page (cb, opts) {
         ? opts.pushState
         : window.history && window.history.pushState
     ;
+    this.scroll = opts.saveScroll !== false ? {} : null;
     this.cb = cb;
 }
 
 Page.prototype.show = function (href) {
     href = href.replace(/^\/+/, '/');
     if (this.current === href) return;
-    current = href;
-    this.cb(href);
+    if (this.scroll && this.current) {
+        this.scroll[this.current] = [ window.scrollX, window.scrollY ];
+    }
+    this.current = href;
+    
+    var scroll = this.scroll[href];
+    this.cb(href, {
+        scrollX : scroll && scroll[0] || 0,
+        scrollY : scroll && scroll[1] || 0,
+    });
     
     if (this.hasPushState) {
         var mismatched = window.location.pathname !== href;
