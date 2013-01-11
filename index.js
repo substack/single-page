@@ -26,7 +26,7 @@ module.exports = function (cb, opts) {
     onpopstate();
     
     var fn = function (href) { return page.show(href) };
-    fn.navigate = function (href) { return page.navigate(href) };
+    fn.push = function (href) { return page.push(href) };
     fn.show = function (href) { return page.show(href) };
     return fn;
 };
@@ -56,17 +56,17 @@ Page.prototype.show = function (href) {
     this.pushHref(href);
 };
 
-Page.prototype.navigate = function (href) {
-    href = href.replace(/^\/+/, '/');
-    this.saveScroll(href);
-    this.pushHref(href);
-};
-
 Page.prototype.saveScroll = function (href) {
     if (this.current === href) return;
     if (this.scroll && this.current) {
         this.scroll[this.current] = [ window.scrollX, window.scrollY ];
     }
+};
+
+Page.prototype.push = function (href) {
+    href = href.replace(/^\/+/, '/');
+    this.saveScroll(href);
+    this.pushHref(href);
 };
 
 Page.prototype.pushHref = function (href) {
