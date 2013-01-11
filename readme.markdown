@@ -104,6 +104,10 @@ that the user left off at.
 
 Navigate to `href`, firing the callback passed to singlePage.
 
+## showPage.push(href)
+
+Update the location href in the address bar without firing any callbacks.
+
 # install
 
 With `npm` do:
