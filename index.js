@@ -25,7 +25,10 @@ module.exports = function (cb, opts) {
     }
     onpopstate();
     
-    return function (href) { return page.show(href) };
+    var fn = function (href) { return page.show(href) };
+    fn.navigate = function (href) { return page.navigate(href) };
+    fn.show = function (href) { return page.show(href) };
+    return fn;
 };
 
 function Page (cb, opts) {
@@ -41,10 +44,7 @@ function Page (cb, opts) {
 
 Page.prototype.show = function (href) {
     href = href.replace(/^\/+/, '/');
-    if (this.current === href) return;
-    if (this.scroll && this.current) {
-        this.scroll[this.current] = [ window.scrollX, window.scrollY ];
-    }
+    this.saveScroll(href);
     this.current = href;
     
     var scroll = this.scroll[href];
@@ -52,6 +52,25 @@ Page.prototype.show = function (href) {
         scrollX : scroll && scroll[0] || 0,
         scrollY : scroll && scroll[1] || 0,
     });
+    
+    this.pushHref(href);
+};
+
+Page.prototype.navigate = function (href) {
+    href = href.replace(/^\/+/, '/');
+    this.saveScroll(href);
+    this.pushHref(href);
+};
+
+Page.prototype.saveScroll = function (href) {
+    if (this.current === href) return;
+    if (this.scroll && this.current) {
+        this.scroll[this.current] = [ window.scrollX, window.scrollY ];
+    }
+};
+
+Page.prototype.pushHref = function (href) {
+    this.current = href;
     
     if (this.hasPushState) {
         var mismatched = window.location.pathname !== href;
