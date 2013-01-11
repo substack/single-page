@@ -23,7 +23,7 @@ module.exports = function (cb, opts) {
         ;
         page.show(href);
     }
-    onpopstate();
+    process.nextTick(onpopstate);
     
     var fn = function (href) { return page.show(href) };
     fn.push = function (href) { return page.push(href) };
@@ -44,6 +44,8 @@ function Page (cb, opts) {
 
 Page.prototype.show = function (href) {
     href = href.replace(/^\/+/, '/');
+     
+    if (this.current === href) return;
     this.saveScroll(href);
     this.current = href;
     
@@ -57,7 +59,6 @@ Page.prototype.show = function (href) {
 };
 
 Page.prototype.saveScroll = function (href) {
-    if (this.current === href) return;
     if (this.scroll && this.current) {
         this.scroll[this.current] = [ window.scrollX, window.scrollY ];
     }
