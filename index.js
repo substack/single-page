@@ -11,7 +11,7 @@ module.exports = function (cb, opts) {
     
     function onhashchange () {
         var href = window.location.hash.replace(/^#!\/?/, '/');
-        if (current !== href && /^#!/.test(window.location.hash)) {
+        if (page.current !== href && /^#!/.test(window.location.hash)) {
             page.show(href);
         }
     }
