@@ -52,7 +52,7 @@ Page.prototype.show = function (href) {
     var scroll = this.scroll[href];
     this.cb(href, {
         scrollX : scroll && scroll[0] || 0,
-        scrollY : scroll && scroll[1] || 0,
+        scrollY : scroll && scroll[1] || 0
     });
     
     this.pushHref(href);
