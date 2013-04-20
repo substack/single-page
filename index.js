@@ -1,26 +1,9 @@
 module.exports = function (cb, opts) {
     var page = new Page(cb, opts);
-    
-    if (window.addEventListener) {
-        window.addEventListener('hashchange', onhashchange);
-        window.addEventListener('popstate', onpopstate);
-    }
-    else {
-        window.onhashchange = onhashchange;
-    }
-    
-    function onhashchange () {
-        var href = window.location.hash.replace(/^#!\/?/, '/');
-        if (page.current !== href && /^#!/.test(window.location.hash)) {
-            page.show(href);
-        }
-    }
+    window.addEventListener('popstate', onpopstate);
     
     function onpopstate () {
-        var href = /^#!/.test(window.location.hash)
-            ? window.location.hash.replace(/^#!/, '/')
-            : window.location.pathname
-        ;
+        var href = window.location.pathname;
         page.show(href);
     }
     process.nextTick(onpopstate);
@@ -72,17 +55,6 @@ Page.prototype.push = function (href) {
 
 Page.prototype.pushHref = function (href) {
     this.current = href;
-    
-    if (this.hasPushState) {
-        var mismatched = window.location.pathname !== href;
-        if (mismatched) window.history.pushState(null, '', href);
-    }
-    else if (window.location.hash !== '#!' + href) {
-        if (window.location.pathname !== '/') {
-            window.location.href = '/#!' + href;
-        }
-        else {
-            window.location.hash = '#!' + href;
-        }
-    }
+    var mismatched = window.location.pathname !== href;
+    if (mismatched) window.history.pushState(null, '', href);
 };
