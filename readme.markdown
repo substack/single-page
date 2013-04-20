@@ -1,6 +1,6 @@
 # single-page
 
-pushState callback with a #hash fallback
+write single-page apps with a single callback to handle pushState events
 
 # example
 
