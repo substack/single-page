@@ -3,7 +3,7 @@ module.exports = function (cb, opts) {
     window.addEventListener('popstate', onpopstate);
     
     function onpopstate () {
-        var href = window.location.pathname;
+        var href = getPathnameWithHash();
         page.show(href);
     }
     process.nextTick(onpopstate);
@@ -13,6 +13,10 @@ module.exports = function (cb, opts) {
     fn.show = function (href) { return page.show(href) };
     return fn;
 };
+
+function getPathnameWithHash () {
+  return (window.location.pathname || '') + (window.location.hash || '');
+}
 
 function Page (cb, opts) {
     if (!opts) opts = {};
@@ -55,6 +59,6 @@ Page.prototype.push = function (href) {
 
 Page.prototype.pushHref = function (href) {
     this.current = href;
-    var mismatched = window.location.pathname !== href;
+    var mismatched = getPathnameWithHash() !== href;
     if (mismatched) window.history.pushState(null, '', href);
 };
