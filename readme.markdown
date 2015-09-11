@@ -2,6 +2,8 @@
 
 write single-page apps with support for url hashes and a single callback to handle pushState events
 
+If you don't need support for url hashes, checkout [single-page](https://www.npmjs.com/package/single-page)
+
 # example
 
 Given some html with elements `#foo`, `#bar`, and `#baz`:
