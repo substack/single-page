@@ -1,26 +1,35 @@
 {
-    "name" : "single-page",
+    "name" : "single-page-hash",
     "version" : "1.0.0",
-    "description" : "write single-page apps with a single callback to handle pushState events",
+    "description" : "write single-page apps with support for url hashes and a single callback to handle pushState events",
     "main" : "index.js",
     "scripts" : {
-        "test" : "tap test/*.js"
+      "start": "npm run www & npm run watch",
+      "www": "node example/server.js",
+      "watch": "watchify example/main.js -o example/bundle.js -dv",
+      "bundle": "browserify example/main.js -o example/bundle.js"
     },
     "repository" : {
         "type" : "git",
-        "url" : "git://github.com/substack/single-page.git"
+        "url" : "git://github.com/serapath/single-page.git"
     },
-    "homepage" : "https://github.com/substack/single-page",
+    "homepage" : "https://github.com/serapath/single-page",
     "keywords" : [
         "pushState",
+        "history",
         "single-page",
+        "single-page-hash",
         "client-side",
         "browser"
     ],
-    "author" : {
+    "contributors" : [{
         "name" : "James Halliday",
         "email" : "mail@substack.net",
         "url" : "http://substack.net"
-    },
+    },{
+      "name" : "Alexander Praetorius",
+      "email" : "dev@serapath.de",
+      "url" : "http://serapath.de"
+    }],
     "license" : "MIT"
 }
