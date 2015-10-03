@@ -1,6 +1,6 @@
 {
     "name" : "single-page",
-    "version" : "1.0.0",
+    "version" : "1.1.0",
     "description" : "write single-page apps with a single callback to handle pushState events",
     "main" : "index.js",
     "scripts" : {
