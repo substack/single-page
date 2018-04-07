@@ -1,13 +1,13 @@
 module.exports = function (cb, opts) {
     var page = new Page(cb, opts);
     window.addEventListener('popstate', onpopstate);
-    
+
     function onpopstate () {
         var href = getPath();
         page.show(href);
     }
     process.nextTick(onpopstate);
-    
+
     var fn = function (href) { return page.show(href) };
     fn.push = function (href) { return page.push(href) };
     fn.show = function (href) { return page.show(href) };
@@ -27,18 +27,18 @@ function Page (cb, opts) {
 
 Page.prototype.show = function (href) {
     href = href.replace(/^\/+/, '/');
-     
+
     if (this.current === href) return;
     this.saveScroll(href);
     this.current = href;
-    
+
     var scroll = this.scroll[href];
+    this.pushHref(href);
+
     this.cb(href, {
         scrollX : scroll && scroll[0] || 0,
         scrollY : scroll && scroll[1] || 0
     });
-    
-    this.pushHref(href);
 };
 
 Page.prototype.saveScroll = function (href) {

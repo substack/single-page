@@ -1,26 +1,26 @@
 {
-    "name" : "single-page",
-    "version" : "1.1.0",
-    "description" : "write single-page apps with a single callback to handle pushState events",
-    "main" : "index.js",
-    "scripts" : {
-        "test" : "tap test/*.js"
+    "name": "single-page",
+    "version": "1.1.0",
+    "description": "write single-page apps with a single callback to handle pushState events",
+    "main": "index.js",
+    "scripts": {
+        "test": "tap test/*.js"
     },
-    "repository" : {
-        "type" : "git",
-        "url" : "git://github.com/substack/single-page.git"
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/substack/single-page.git"
     },
-    "homepage" : "https://github.com/substack/single-page",
-    "keywords" : [
+    "homepage": "https://github.com/substack/single-page",
+    "keywords": [
         "pushState",
         "single-page",
         "client-side",
         "browser"
     ],
-    "author" : {
-        "name" : "James Halliday",
-        "email" : "mail@substack.net",
-        "url" : "http://substack.net"
+    "author": {
+        "name": "James Halliday",
+        "email": "mail@substack.net",
+        "url": "http://substack.net"
     },
-    "license" : "MIT"
+    "license": "MIT"
 }
